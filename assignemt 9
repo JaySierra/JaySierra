@@ -1,0 +1,80 @@
+#!/bin/bash
+
+<<com
+num=(36 389 457 68 45 18 1000 2000 2222 15 74 45 65 12 5 78 89 20 95 39)
+sort=0
+echo ${num[@]}
+len=${#num[@]}
+
+
+for ((i=0; i<$len; i++))
+do
+        for((j=i+1; j<$len; j++))
+        do
+                if [ ${num[i]} -le ${num[j]} ]
+                then
+                        continue
+                else
+                        sort=${num[i]}
+                        num[i]=${num[j]}
+                        num[j]=$sort
+                fi
+        done
+done
+echo ${num[@]}
+
+
+num1=(15 26 48 65 51 47 62 95 11 63 52 14 44 58 69 62 51 72 92 98)
+sort=0
+echo ${num1[@]}
+len1=${#num1[@]}
+
+for ((i=0; i<$len; i++))
+do
+        for((j=i+1; j<$len; j++))
+        do
+                if [ ${num1[i]} -gt ${num1[j]} ]
+                then
+                        continue
+                else
+                        sort=${num1[i]}
+                        num1[i]=${num1[j]}
+                        num1[j]=$sort
+                fi
+        done
+done
+echo ${num1[@]}
+com
+
+max=50
+count=1
+
+while [ "$count" -le $max ];
+do
+number[$count]=$RANDOM
+let "count += 1"
+done
+echo "${number[@]}"
+lens=${number[@]}
+
+a=()
+for i in "${number[@]}";
+do
+        mod=$(( $i % 2 ))
+        if [ $mod -eq 0 ]
+        then
+                a+=$i
+                let sumeven=sumeven+$i
+        else
+                b+=$i
+                let sumodd=sumodd+$i
+        fi
+done
+echo "array of even"
+echo "$a"
+echo "even sum"
+echo $sumeven
+echo "array of odd"
+echo "$b"
+echo "sum of odd"
+echo $sumodd
